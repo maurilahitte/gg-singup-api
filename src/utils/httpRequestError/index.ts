@@ -1,5 +1,3 @@
-import logger from '../logger';
-
 const parseError = (error: string): Record<string, unknown> | string => {
     let errorParsed;
     try {
@@ -11,16 +9,14 @@ const parseError = (error: string): Record<string, unknown> | string => {
     return errorParsed;
 };
 
-export class AppError extends Error {
+export class HttpRequestError extends Error {
     public readonly name: string;
     public readonly httpCode: number;
-    public readonly isOperational: boolean;
 
     constructor(
         name: string,
         httpCode: number,
-        description: string,
-        isOperational: boolean
+        description: string
     ) {
         super(description);
 
@@ -29,18 +25,5 @@ export class AppError extends Error {
 
         this.name = name;
         this.httpCode = httpCode;
-        this.isOperational = isOperational;
     }
 }
-
-export const handleError = (err: AppError): boolean => {
-    const { message, isOperational, httpCode, name, stack } = err;
-    logger.error(parseError(message) as string, {
-        isOperational,
-        httpCode,
-        name,
-        stack,
-    });
-
-    return isOperational;
-};

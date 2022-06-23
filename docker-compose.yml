@@ -2,7 +2,7 @@ version: '3.4'
 services:
     template:
         image: node:16.15
-        container_name: template
+        container_name: GoGrowAPI
         command: ./node_modules/.bin/nodemon
         working_dir: /app
         env_file:

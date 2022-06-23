@@ -1,20 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
-import { AppError, handleError } from '../../utils/app-error';
+import { HttpRequestError} from '../../utils/httpRequestError';
 
 export default (
-    err: Error,
+    err: HttpRequestError,
     req: Request,
     res: Response,
     next: NextFunction
 ): void => {
     const message = 'Something went wrong';
-
-    const isOperational = handleError(err as AppError);
-    if (!isOperational) {
-        next(err);
-    } else {
-        // The AWS health check will stop the container if many 500 errors are returned
-        // That's why we define the 422 (a very uncommon error code) as the default unhandled error status
-        res.status(422).json(message);
-    }
+    
+    res.status(err.httpCode || 500).json(err.message || message);
 };
