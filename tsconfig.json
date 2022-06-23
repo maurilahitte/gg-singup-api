@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "target": "es2019",
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "outDir": "dist/src",
+        "baseUrl": "./src",
+        "allowJs": true,
+        "paths": {
+            "*": ["node_modules/*"]
+        },
+        "typeRoots": ["@types", "node_modules/@types"]
+    },
+    "include": ["./src/**/*"],
+    "exclude": ["node_modules", "dist"]
+}

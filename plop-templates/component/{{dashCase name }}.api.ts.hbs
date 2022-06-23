@@ -1,0 +1,13 @@
+import { Router } from 'express';
+
+const router = Router();
+
+router.get('/', (req, res, next) => {
+    try {
+        res.status(200).json({ route: "example" });
+    } catch (err) {
+        next(err);
+    }
+});
+
+export default router;

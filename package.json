@@ -1,0 +1,95 @@
+{
+    "name": "api-gogrow-singup",
+    "version": "0.0.1",
+    "description": "GoGrow API for SingUp ",
+    "main": "src/index.ts",
+    "scripts": {
+        "cli": "plop",
+        "lint": "eslint . --ext .ts",
+        "lint:fix": "eslint . --ext .ts --fix",
+        "test": "NODE_ENV=test ./node_modules/.bin/mocha --watch --reporter=spec",
+        "test:ci": "NODE_ENV=test ./node_modules/.bin/mocha --timeout=10000 --reporter=spec --check-leaks",
+        "coverage": "./node_modules/.bin/nyc --reporter=text-summary npm run test:ci",
+        "coverage:verbose": "./node_modules/.bin/nyc --reporter=html --reporter=text npm run test:ci",
+        "dev": "docker container prune -f && COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 BUILDKIT_PROGRESS=plain docker-compose up",
+        "build": "./node_modules/.bin/tsc -p .",
+        "prestart": "npm run build",
+        "start": "node --trace-warnings ./dist/src/index.js"
+    },
+    "importSort": {
+        ".js, .jsx, .ts, .tsx": {
+            "style": "module",
+            "parser": "typescript"
+        }
+    },
+    "lint-staged": {
+        "*.ts": [
+            "organize-imports-cli",
+            "prettier --write",
+            "eslint --cache --fix"
+        ]
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/carvi-latam/karvi-api-template.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/carvi-latam/karvi-api-template/issues"
+    },
+    "homepage": "https://github.com/carvi-latam/karvi-api-template#readme",
+    "devDependencies": {
+        "@commitlint/cli": "^12.1.3",
+        "@commitlint/config-conventional": "^12.1.3",
+        "@istanbuljs/nyc-config-typescript": "^1.0.1",
+        "@types/chai": "^4.2.14",
+        "@types/cors": "^2.8.8",
+        "@types/mocha": "^9.0.0",
+        "@types/node-fetch": "^2.5.7",
+        "@types/sinon": "^10.0.2",
+        "@typescript-eslint/eslint-plugin": "^4.9.0",
+        "@typescript-eslint/parser": "^4.9.0",
+        "@types/swagger-jsdoc": "^3.0.2",
+        "@types/swagger-ui-express": "^4.1.2",
+        "chai": "^4.3.4",
+        "chai-http": "^4.3.0",
+        "cz-conventional-changelog": "^3.3.0",
+        "dotenv": "^10.0.0",
+        "eslint": "^7.14.0",
+        "eslint-config-prettier": "^6.15.0",
+        "eslint-plugin-mocha": "^9.0.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "eslint-plugin-promise": "^4.2.1",
+        "husky": "^4.3.0",
+        "lint-staged": "^10.5.2",
+        "mocha": "^9.0.1",
+        "nodemon": "^2.0.7",
+        "nyc": "^15.1.0",
+        "organize-imports-cli": "^0.8.0",
+        "plop": "^2.1.0",
+        "prettier": "^2.2.1",
+        "sinon": "^11.1.1"
+    },
+    "dependencies": {
+        "@types/express": "^4.17.13",
+        "@types/morgan": "^1.9.2",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "morgan": "^1.10.0",
+        "node-fetch": "^2.6.1",
+        "node-mocks-http": "^1.11.0",
+        "save-dev": "^0.0.1-security",
+        "ts-node": "^10.3.0",
+        "typescript": "^4.2.4",
+        "winston": "^3.3.3",
+        "swagger-jsdoc": "^3.0.2",
+        "swagger-ui-express": "^4.1.2"
+    }
+}
